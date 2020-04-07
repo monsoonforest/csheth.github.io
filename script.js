@@ -16,7 +16,7 @@ attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreet
 }).addTo(map);
 
 // Edit to upload GeoJSON data file from your local directory
-$.getJSON("ct-towns-density.geojson", function (data) {
+$.getJSON("wards-bengaluru-urban-elderly-population.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
     style: style,
     onEachFeature: onEachFeature
@@ -26,20 +26,20 @@ $.getJSON("ct-towns-density.geojson", function (data) {
 // Edit ranges and colors to match your data; see http://colorbrewer.org
 // Any values not listed in the ranges below displays as the last color
 function getColor(d) {
-  return d > 5000 ? '#800026' :
-         d > 1000 ? '#BD0026' :
-         d > 500  ? '#E31A1C' :
-         d > 200  ? '#FC4E2A' :
-         d > 100  ? '#FD8D3C' :
-         d > 50   ? '#FEB24C' :
-         d > 30   ? '#FED976' :
+  return d > 250 ? '#800026' :
+         d > 280 ? '#BD0026' :
+         d > 270  ? '#E31A1C' :
+         d > 260  ? '#FC4E2A' :
+         d > 240  ? '#FD8D3C' :
+         d > 220   ? '#FEB24C' :
+         d > 200   ? '#FED976' :
                     '#FFEDA0';
 }
 
 // Edit the getColor property to match data column header in your GeoJson file
 function style(feature) {
   return {
-    fillColor: getColor(feature.properties.density2010),
+    fillColor: getColor(feature.properties.elderly_above_60),
     weight: 1,
     opacity: 1,
     color: 'black',
@@ -84,9 +84,9 @@ info.onAdd = function (map) {
 
 // Edit info box text and variables (such as props.density2010) to match those in your GeoJSON data
 info.update = function (props) {
-  this._div.innerHTML = '<h4>Connecticut Town<br />Population density 2010</h4>' +  (props ?
-    '<b>' + props.town + '</b><br />' + props.density2010 + ' people / mi<sup>2</sup>'
-    : 'Hover over a town');
+  this._div.innerHTML = '<h4>Bengaluru City<br />Population of Elderly 2014</h4>' +  (props ?
+    '<b>' + props.Ward_Name + '</b><br />' + props.elderly_above_60 + ' people / mi<sup>2</sup>'
+    : 'Hover over a Ward');
 };
 info.addTo(map);
 
@@ -95,7 +95,7 @@ info.addTo(map);
 var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend'),
-    grades = [0, 30, 50, 100, 200, 500, 1000, 5000],
+    grades = [250,280,270,260,240,220,200],
     labels = [],
     from, to;
   for (var i = 0; i < grades.length; i++) {
