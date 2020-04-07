@@ -10,9 +10,9 @@ map.attributionControl
 .setPrefix('View <a href="http://github.com/jackdougherty/leaflet-map-polygon-hover">open-source code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 map.attributionControl.addAttribution('Population data &copy; <a href="https://eci.gov.in/">ECI India </a>');
 
-// Basemap layer
-new L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png', {
-attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+// Basemap 
+layerL.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
 }).addTo(map);
 
 // Edit to upload GeoJSON data file from your local directory
@@ -43,7 +43,7 @@ function style(feature) {
     weight: 1,
     opacity: 1,
     color: 'black',
-    fillOpacity: 0.5
+    fillOpacity: 0.6
   };
 }
 
