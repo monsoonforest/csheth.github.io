@@ -1,14 +1,14 @@
 // Edit the center point and zoom level
 var map = L.map('map', {
   center: [12.954517,77.3507346],
-  zoom: 9,
+  zoom: 12  ,
   scrollWheelZoom: false
 });
 
 // Edit links to your GitHub repo and data source credit
 map.attributionControl
 .setPrefix('View <a href="http://github.com/jackdougherty/leaflet-map-polygon-hover">open-source code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
-map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census</a>');
+map.attributionControl.addAttribution('Population data &copy; <a href="https://eci.gov.in/">ECI India</a>');
 
 // Basemap layer
 new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
@@ -16,7 +16,7 @@ attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreet
 }).addTo(map);
 
 // Edit to upload GeoJSON data file from your local directory
-$.getJSON("wards-bengaluru-urban-elderly-population.geojson", function (data) {
+$.getJSON("bengaluru-wards-elderly-pop-joined.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
     style: style,
     onEachFeature: onEachFeature
