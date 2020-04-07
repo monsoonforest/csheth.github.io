@@ -43,7 +43,7 @@ function style(feature) {
     weight: 1,
     opacity: 1,
     color: 'black',
-    fillOpacity: 0.3
+    fillOpacity: 0.5
   };
 }
 
