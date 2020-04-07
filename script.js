@@ -1,6 +1,6 @@
 // Edit the center point and zoom level
 var map = L.map('map', {
-  center: [12.954517,77.3507346],
+  center: [12.9761232,77.5918883],
   zoom: 11  ,
   scrollWheelZoom: true
 });
@@ -26,20 +26,20 @@ $.getJSON("bengaluru-wards-joined.geojson", function (data) {
 // Edit ranges and colors to match your data; see http://colorbrewer.org
 // Any values not listed in the ranges below displays as the last color
 function getColor(d) {
-  return d > 10000 ? '#800026' :
-         d > 8000 ? '#BD0026' :
-         d > 6000  ? '#E31A1C' :
-         d > 5000  ? '#FC4E2A' :
-         d > 4000  ? '#FD8D3C' :
-         d > 3000   ? '#FEB24C' :
-         d > 2000   ? '#FED976' :
+  return d > 50 ? '#800026' :
+         d > 40 ? '#BD0026' :
+         d > 30  ? '#E31A1C' :
+         d > 10  ? '#FC4E2A' :
+         d > 5  ? '#FD8D3C' :
+         d > 2.5   ? '#FEB24C' :
+         d > 0.5   ? '#FED976' :
                     '#FFEDA0';
 }
 
 // Edit the getColor property to match data column header in your GeoJson file
 function style(feature) {
   return {
-    fillColor: getColor(feature.properties.Total),
+    fillColor: getColor(feature.properties.Elderly_Density),
     weight: 1,
     opacity: 1,
     color: 'black',
@@ -85,7 +85,7 @@ info.onAdd = function (map) {
 // Edit info box text and variables (such as props.density2010) to match those in your GeoJSON data
 info.update = function (props) {
   this._div.innerHTML = '<h4>Bengaluru City<br />Population of Elderly 2014</h4>' +  (props ?
-    '<b>' + props.Ward_Name + '</b><br />' + props.Total + ' people >'
+    '<b>' + props.Ward_Name + '</b><br />' + props.Total + ' Senior Citizens'
     : 'Hover over a Ward');
 };
 info.addTo(map);
