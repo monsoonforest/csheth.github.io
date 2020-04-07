@@ -1,8 +1,8 @@
 // Edit the center point and zoom level
 var map = L.map('map', {
   center: [12.954517,77.3507346],
-  zoom: 12  ,
-  scrollWheelZoom: false
+  zoom: 11  ,
+  scrollWheelZoom: true
 });
 
 // Edit links to your GitHub repo and data source credit
@@ -39,7 +39,7 @@ function getColor(d) {
 // Edit the getColor property to match data column header in your GeoJson file
 function style(feature) {
   return {
-    fillColor: getColor(feature.properties.total),
+    fillColor: getColor(feature.properties.Total),
     weight: 1,
     opacity: 1,
     color: 'black',
@@ -85,7 +85,7 @@ info.onAdd = function (map) {
 // Edit info box text and variables (such as props.density2010) to match those in your GeoJSON data
 info.update = function (props) {
   this._div.innerHTML = '<h4>Bengaluru City<br />Population of Elderly 2014</h4>' +  (props ?
-    '<b>' + props.Ward_Name + '</b><br />' + props.total + ' people >'
+    '<b>' + props.Ward_Name + '</b><br />' + props.Total + ' people >'
     : 'Hover over a Ward');
 };
 info.addTo(map);
