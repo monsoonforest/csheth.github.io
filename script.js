@@ -8,7 +8,7 @@ var map = L.map('map', {
 // Edit links to your GitHub repo and data source credit
 map.attributionControl
 .setPrefix('View <a href="http://github.com/jackdougherty/leaflet-map-polygon-hover">open-source code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
-map.attributionControl.addAttribution('Population data &copy; <a href="https://eci.gov.in/">ECI India</a>');
+map.attributionControl.addAttribution('Population data &copy; <a href="https://eci.gov.in/">ECI India </a>');
 
 // Basemap layer
 new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
@@ -16,7 +16,7 @@ attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreet
 }).addTo(map);
 
 // Edit to upload GeoJSON data file from your local directory
-$.getJSON("bengaluru-wards-elderly-pop-joined.geojson", function (data) {
+$.getJSON("bengaluru-wards-joined.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
     style: style,
     onEachFeature: onEachFeature
@@ -26,20 +26,20 @@ $.getJSON("bengaluru-wards-elderly-pop-joined.geojson", function (data) {
 // Edit ranges and colors to match your data; see http://colorbrewer.org
 // Any values not listed in the ranges below displays as the last color
 function getColor(d) {
-  return d > 250 ? '#800026' :
-         d > 280 ? '#BD0026' :
-         d > 270  ? '#E31A1C' :
-         d > 260  ? '#FC4E2A' :
-         d > 240  ? '#FD8D3C' :
-         d > 220   ? '#FEB24C' :
-         d > 200   ? '#FED976' :
+  return d > 10000 ? '#800026' :
+         d > 8000 ? '#BD0026' :
+         d > 6000  ? '#E31A1C' :
+         d > 5000  ? '#FC4E2A' :
+         d > 4000  ? '#FD8D3C' :
+         d > 3000   ? '#FEB24C' :
+         d > 2000   ? '#FED976' :
                     '#FFEDA0';
 }
 
 // Edit the getColor property to match data column header in your GeoJson file
 function style(feature) {
   return {
-    fillColor: getColor(feature.properties.elderly_above_60),
+    fillColor: getColor(feature.properties.total),
     weight: 1,
     opacity: 1,
     color: 'black',
@@ -85,7 +85,7 @@ info.onAdd = function (map) {
 // Edit info box text and variables (such as props.density2010) to match those in your GeoJSON data
 info.update = function (props) {
   this._div.innerHTML = '<h4>Bengaluru City<br />Population of Elderly 2014</h4>' +  (props ?
-    '<b>' + props.Ward_Name + '</b><br />' + props.elderly_above_60 + ' people / mi<sup>2</sup>'
+    '<b>' + props.Ward_Name + '</b><br />' + props.total + ' people >'
     : 'Hover over a Ward');
 };
 info.addTo(map);
@@ -95,7 +95,7 @@ info.addTo(map);
 var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend'),
-    grades = [250,280,270,260,240,220,200],
+    grades = [10000,8000,6000,5000,4000,3000,2000],
     labels = [],
     from, to;
   for (var i = 0; i < grades.length; i++) {
